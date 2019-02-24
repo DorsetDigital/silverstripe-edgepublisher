@@ -1,7 +1,7 @@
 {
   "name": "dorsetdigital/silverstripe-edgepublisher",
   "description": "Works with static publisher to deploy website code to serverless edge services",
-  "type": "silverstripe-module",
+  "type": "silverstripe-vendormodule",
   "homepage": "https://github.com/DorsetDigital/silverstripe-edgepublisher",
   "keywords": ["silverstripe", "cdn", "serverless", "static publisher"],
   "authors": [
