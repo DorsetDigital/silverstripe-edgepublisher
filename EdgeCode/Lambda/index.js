@@ -1,54 +1,51 @@
 'use strict';
 
 const zlib = require('zlib');
+var AWS = require('aws-sdk');
 
 exports.handler = (event, context, callback) => {
+
+    var ddb = new AWS.DynamoDB.DocumentClient({region: 'us-east-1'});
 
     const request = event.Records[0].cf.request;
     var dbKey = request.uri.replace(/^\/+/g, '');
 
-// Load the AWS SDK for Node.js
-    var AWS = require('aws-sdk');
-// Set the region
-    AWS.config.update({region: 'us-east-1'});
-
-// Create the DynamoDB service object
-    var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
-
     var params = {
-        TableName: 'webtest',
+        TableName: "webtest",
         Key: {
-            'urlsegment': {S: dbKey}
-        },
-        ProjectionExpression: 'content'
-    };
-    var bodyContent = '';
-
-// Call DynamoDB to read the item from the table
-    ddb.getItem(params, function (err, data) {
-        if (err) {
-            bodyContent = 'Bugger';
-        } else {
-            bodyContent = data.Item;
+            urlsegment: dbKey
         }
+    };
+
+    ddb.get(params, function (err, data) {
+
+        if (err) {
+            var buffer = zlib.gzipSync('Not Found');
+            var resCode = '404';
+        } else {
+            var buffer = zlib.gzipSync(data['Item']['content']);
+            var resCode = '200';
+        }
+
+        const base64EncodedBody = buffer.toString('base64');
+
+        var response = {
+            headers: {
+                'content-type': [{key: 'Content-Type', value: 'text/html; charset=utf-8'}],
+                'content-encoding': [{key: 'Content-Encoding', value: 'gzip'}],
+                'cache-control': [{key: 'Cache-Control', value: 'max-age=1800'}],
+                'x-server': [{key: 'X-Server', value: 'Service=Edge Host'}]
+            },
+            body: base64EncodedBody,
+            bodyEncoding: 'base64',
+            status: resCode,
+            statusDescription: "OK"
+        }
+
+        callback(null, response);
+
+
+
     });
 
-
-    const buffer = zlib.gzipSync(bodyContent);
-    const base64EncodedBody = buffer.toString('base64');
-
-    var response = {
-        headers: {
-            'content-type': [{key: 'Content-Type', value: 'text/html; charset=utf-8'}],
-            'content-encoding': [{key: 'Content-Encoding', value: 'gzip'}],
-            'cache-control': [{key: 'Cache-Control', value: 'max-age=90'}],
-            'x-mechanism': [{key: 'x-mechanism', value: 'service=Edge Host'}]
-        },
-        body: base64EncodedBody,
-        bodyEncoding: 'base64',
-        status: '200',
-        statusDescription: "OK"
-    }
-
-    callback(null, response);
 };
