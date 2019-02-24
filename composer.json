@@ -1,0 +1,28 @@
+{
+  "name": "dorsetdigital/silverstripe-edgepublisher",
+  "description": "Works with static publisher to deploy website code to serverless edge services",
+  "type": "silverstripe-module",
+  "homepage": "https://github.com/DorsetDigital/silverstripe-edgepublisher",
+  "keywords": ["silverstripe", "cdn", "serverless", "static publisher"],
+  "authors": [
+    {
+      "name": "Tim Burt",
+      "email": "tim@dorset-digital.net"
+    }
+  ],
+  "require": {
+    "silverstripe/vendor-plugin": "^1.0",
+    "silverstripe/cms": "^4.0",
+    "silverstripe/staticpublishqueue": "^4",
+    "aws/aws-sdk-php": "^3.87"
+  },
+  "license": "BSD-3-Clause",
+  "autoload": {
+    "psr-4": {
+      "DorsetDigital\\EdgePublisher\\": "src/"
+    }
+  },
+  "extra": {
+  },
+  "minimum-stability": "dev"
+}
