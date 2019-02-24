@@ -1,0 +1,7 @@
+---
+Name: custompublishqueue
+After: 'staticpublishqueue'
+---
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\StaticPublishQueue\Publisher:
+    class: DorsetDigital\EdgePublisher\Publisher
