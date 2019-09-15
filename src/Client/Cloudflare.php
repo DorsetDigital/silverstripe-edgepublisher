@@ -1,10 +1,10 @@
 <?php
-namespace DorsetDigital\EdgePublisher;
+namespace DorsetDigital\EdgePublisher\Client;
 
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 
-class CFWorkers implements EdgePublisher
+class Cloudflare implements EdgePublisher
 {
 
     use Configurable;

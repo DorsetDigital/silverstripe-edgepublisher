@@ -1,6 +1,6 @@
 <?php
 
-namespace DorsetDigital\EdgePublisher;
+namespace DorsetDigital\EdgePublisher\Client;
 
 use Aws\Credentials\Credentials;
 use Aws\DynamoDb\Marshaler;

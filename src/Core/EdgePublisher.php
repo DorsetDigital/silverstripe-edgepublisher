@@ -1,6 +1,6 @@
 <?php
 
-namespace DorsetDigital\EdgePublisher;
+namespace DorsetDigital\EdgePublisher\Core;
 
 interface EdgePublisher
 {

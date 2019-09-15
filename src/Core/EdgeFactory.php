@@ -1,6 +1,9 @@
 <?php
 
-namespace DorsetDigital\EdgePublisher;
+namespace DorsetDigital\EdgePublisher\Core;
+
+use DorsetDigital\EdgePublisher\Client\AWS;
+use DorsetDigital\EdgePublisher\Client\Cloudflare;
 
 class EdgeFactory
 {
@@ -15,7 +18,7 @@ class EdgeFactory
             case 'aws':
                 return AWS::create();
             case 'cloudflare':
-                return CFWorkers::create();
+                return Cloudflare::create();
 
             default:
                 throw new \Exception(_t(__CLASS__.'.noclient', 'No valid edge client defined'));
