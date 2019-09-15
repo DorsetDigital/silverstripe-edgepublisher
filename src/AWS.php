@@ -26,6 +26,12 @@ class AWS implements EdgePublisher
      * @var string
      * @config
      */
+    private static $url_field;
+
+    /**
+     * @var string
+     * @config
+     */
     private static $aws_region;
 
     /**
@@ -69,7 +75,7 @@ class AWS implements EdgePublisher
     {
         $mashaler = new Marshaler();
         $data = [
-            'urlsegment' => $url,
+            $this->config()->get('url_field') => $url,
             'content' => $content
         ];
         $item = $mashaler->marshalJson(json_encode($data));

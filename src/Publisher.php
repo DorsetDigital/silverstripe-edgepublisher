@@ -9,6 +9,7 @@ use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\StaticPublishQueue\Publisher as StaticPublisher;
 use function SilverStripe\StaticPublishQueue\URLtoPath;
+use SilverStripe\StaticPublishQueue\Publisher\FilesystemPublisher;
 
 class Publisher extends StaticPublisher
 {
@@ -101,7 +102,7 @@ class Publisher extends StaticPublisher
             return;
         }
         if ($path = $this->URLtoPath($url)) {
-            $success = $this->deleteFromPath($path . '.html') && $this->deleteFromPath($path . '.php') && $this->backend->deletePage($url);
+            $success = $this->deleteFromPath($path . '.html') && $this->deleteFromPath($path . '.php') && $this->backend->deletePage($path);
             return [
                 'success' => $success,
                 'url' => $url,
@@ -180,7 +181,7 @@ class Publisher extends StaticPublisher
                 $phpContent = $this->generatePHPCacheFile($response);
                 $success = $this->saveToPath($phpContent, $path . '.php');
             }
-            $edge = $this->backend->savePage($url, $response);
+            $edge = $this->backend->savePage($path, $response->getBody());
             return $this->saveToPath($response->getBody(), $path . '.html') && $success && $edge;
         }
         return false;
