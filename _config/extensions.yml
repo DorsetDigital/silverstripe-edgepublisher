@@ -1,0 +1,7 @@
+---
+Name: edgepublisherextensions
+---
+
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - DorsetDigital\EdgePublisher\Extension\ConfigExtension
