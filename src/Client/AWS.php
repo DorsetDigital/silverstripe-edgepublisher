@@ -7,6 +7,7 @@ use Aws\DynamoDb\Marshaler;
 use Aws\Sdk;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
+use DorsetDigital\EdgePublisher\Core\EdgePublisher;
 
 class AWS implements EdgePublisher
 {
