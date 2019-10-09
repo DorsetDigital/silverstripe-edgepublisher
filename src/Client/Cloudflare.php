@@ -7,6 +7,7 @@ use SilverStripe\Control\Controller;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\SiteConfig\SiteConfig;
+use DorsetDigital\EdgePublisher\Core\EdgePublisher;
 
 class Cloudflare implements EdgePublisher
 {
