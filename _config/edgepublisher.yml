@@ -4,4 +4,4 @@ After: 'staticpublishqueue'
 ---
 SilverStripe\Core\Injector\Injector:
   SilverStripe\StaticPublishQueue\Publisher:
-    class: DorsetDigital\EdgePublisher\Publisher
+    class: DorsetDigital\EdgePublisher\Core\Publisher
