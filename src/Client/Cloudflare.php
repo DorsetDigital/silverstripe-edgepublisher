@@ -75,7 +75,7 @@ class Cloudflare implements EdgePublisher
      */
     public function savePage($url, $content)
     {
-        $this->putPage($url, $content);
+        return $this->putPage($url, $content);
     }
 
     /**
@@ -85,7 +85,7 @@ class Cloudflare implements EdgePublisher
      */
     public function deletePage($url)
     {
-        $this->putPage($url, '', 60);
+        return $this->putPage($url, '', 60);
     }
 
     /**
@@ -129,7 +129,11 @@ class Cloudflare implements EdgePublisher
         }
 
         $client = new Client($clientOpts);
-        $client->request('PUT', $uri, ['body' => $body]);
+        $response = $client->request('PUT', $uri, ['body' => $body]);
+        if (floor($response->getStatusCode() / 100) === 2) {
+            return true;
+        }
+        return false;
 
     }
 }
