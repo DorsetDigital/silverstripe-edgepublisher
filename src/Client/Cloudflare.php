@@ -59,8 +59,7 @@ class Cloudflare implements EdgePublisher
         if (
             empty($config->get('cf_email')) ||
             empty($config->get('auth_key')) ||
-            empty($config->get('account_id')) ||
-            empty($config->get('namespace_name'))
+            empty($config->get('account_id'))
         ) {
             throw new \Exception(_t(__CLASS__ . '.ConstructError',
                 "The publisher module does not appear to be correctly configured.  Please check."));
