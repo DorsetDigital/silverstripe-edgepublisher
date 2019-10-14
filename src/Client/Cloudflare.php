@@ -72,6 +72,8 @@ class Cloudflare implements EdgePublisher
      * Save the page to the KV store
      * @param $url
      * @param $content
+     * @return bool
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function savePage($url, $content)
     {
@@ -82,6 +84,8 @@ class Cloudflare implements EdgePublisher
      * Sends an empty page to the KV store with a 60 second expiry.
      * This has the effect of removing the page from the data store
      * @param $url
+     * @return bool
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function deletePage($url)
     {
@@ -94,6 +98,8 @@ class Cloudflare implements EdgePublisher
      * @param $slug
      * @param $body
      * @param int $expiry
+     * @return bool
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function putPage($slug, $body, $expiry = 0)
     {
