@@ -135,7 +135,7 @@ class Cloudflare implements EdgePublisher
 
         $client = new Client($clientOpts);
         $response = $client->request('PUT', $uri, ['body' => $body]);
-        if (floor($response->getStatusCode() / 100) === 2) {
+        if (floor($response->getStatusCode() / 100) == 2) {
             return true;
         }
         return false;
