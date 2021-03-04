@@ -13,7 +13,7 @@
   "require": {
     "silverstripe/vendor-plugin": "^1.0",
     "silverstripe/cms": "^4.0",
-    "silverstripe/staticpublishqueue": "^4",
+    "silverstripe/staticpublishqueue": "dev-master",
     "aws/aws-sdk-php": "^3.87",
     "guzzlehttp/guzzle": "~6.0"
   },
